@@ -60,10 +60,8 @@ async function fetchPlaces(query, area) {
         rating: p.rating || "4.5",
         address: p.formatted_address || area,
         links: {
-          booking: `https://www.booking.com/searchresults.html?ss=${searchName}&aid=${AFFILIATE_ID || 'travel-ai'}`,
-          viator: `https://www.viator.com/search/${searchName}?mcid=56757`,
-          google: `https://www.google.com/maps/search/?api=1&query=${searchName}`,
-          agoda: `https://www.agoda.com/search?city=${searchName}`
+          klook: `https://klook.tpx.lv/yKNZvKou`,
+          google: `https://www.google.com/maps/search/?api=1&query=${searchName}`
         }
       };
     });
@@ -194,7 +192,7 @@ app.post("/api/generate-trip", async (req, res) => {
     let data = JSON.parse(response.choices[0].message.content);
 
     // ✈️ Add a global flight link for the destination
-    data.flightLink = `https://www.trip.com/flights/?to=${encodeURIComponent(data.destination)}&locale=en-US`;
+    data.flightLink = `https://www.aviasales.com/search/${encodeURIComponent(data.destination)}`
 
     for (const day of data.plan) {
       const area = day.area || data.destination;

@@ -180,7 +180,7 @@
                       <p class="text-xs text-zinc-500 mb-2">
                         Best deals curated for your itinerary
                       </p>
-                      <a :href="`https://ai-travel-agent-lnul.onrender.com/go?url=${encodeURIComponent(r.links.google)}&type=restaurant&source=google&country=${country}`"
+                      <a :href="`https://ai-travel-agent-lnul.onrender.com/go?url=${encodeURIComponent(h.links.google)}&type=restaurant&source=google&country=${country}`"
                         target="_blank" 
                         class="money-btn mt-6">
                         📍 Find Nearby Hotels

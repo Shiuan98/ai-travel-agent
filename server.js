@@ -3,6 +3,7 @@ import cors from "cors";
 import OpenAI from "openai";
 import dotenv from "dotenv";
 import fetch from "node-fetch";
+import fs from "fs";
 
 dotenv.config();
 
@@ -19,6 +20,8 @@ const GOOGLE_API_KEY = process.env.GOOGLE_MAPS_API_KEY;
 const AFFILIATE_ID = "travelai-20"; 
 
 const cache = {};
+
+const analyticsFile = "./analytics.json";
 
 // ==============================
 // 💸 Affiliate Link Helper
@@ -72,40 +75,103 @@ async function fetchPlaces(query, area) {
   }
 }
 
-const userUsage = {};
+// const userUsage = {};
 
-function getUserId(req) {
-  return req.ip; // 先用 IP，之后可以换 token
+// function getUserId(req) {
+//   return req.ip; // 先用 IP，之后可以换 token
+// }
+
+// function checkLimit(userId) {
+//   const today = new Date().toISOString().split("T")[0];
+
+//   if (!userUsage[userId]) {
+//     userUsage[userId] = {};
+//   }
+
+//   if (!userUsage[userId][today]) {
+//     userUsage[userId][today] = 0;
+//   }
+
+//   if (userUsage[userId][today] >= 5) {
+//     return false;
+//   }
+
+//   userUsage[userId][today]++;
+//   return true;
+// }
+
+function loadAnalytics() {
+  if (!fs.existsSync(analyticsFile)) {
+    fs.writeFileSync(analyticsFile, JSON.stringify({ clicks: [] }));
+  }
+  return JSON.parse(fs.readFileSync(analyticsFile));
 }
 
-function checkLimit(userId) {
-  const today = new Date().toISOString().split("T")[0];
-
-  if (!userUsage[userId]) {
-    userUsage[userId] = {};
-  }
-
-  if (!userUsage[userId][today]) {
-    userUsage[userId][today] = 0;
-  }
-
-  if (userUsage[userId][today] >= 5) {
-    return false;
-  }
-
-  userUsage[userId][today]++;
-  return true;
+function saveAnalytics(data) {
+  fs.writeFileSync(analyticsFile, JSON.stringify(data, null, 2));
 }
+
+app.get("/go", (req, res) => {
+  const { url, type, source, country } = req.query;
+
+  if (!url) return res.status(400).send("Missing url");
+
+  const analytics = loadAnalytics();
+
+  analytics.clicks.push({
+    url,
+    type,
+    country: country || "unknown",
+    source: source || "unknown",
+    ip: req.ip,
+    time: new Date().toISOString()
+  });
+
+  saveAnalytics(analytics);
+
+  return res.redirect(url);
+});
+
+app.get("/stats", (req, res) => {
+  const db = loadAnalytics();
+
+  const result = {
+    total: db.clicks.length,
+    hotel: 0,
+    flight: 0,
+    restaurant: 0,
+    byCountry: {},
+    bySource: {}
+  };
+
+  for (const c of db.clicks) {
+    // type stats
+    if (c.type) result[c.type]++;
+
+    // country stats
+    if (c.country) {
+      result.byCountry[c.country] = (result.byCountry[c.country] || 0) + 1;
+    }
+
+    // source stats
+    if (c.source) {
+      result.bySource[c.source] = (result.bySource[c.source] || 0) + 1;
+    }
+  }
+
+  res.json(result);
+});
+
 
 app.post("/api/generate-trip", async (req, res) => {
-  const userId = getUserId(req);
+  // const userId = getUserId(req);
 
-  if (!checkLimit(userId)) {
-    return res.status(429).json({
-      success: false,
-      error: "Daily limit reached (5 times/day). Please try again tomorrow."
-    });
-  }
+  // if (!checkLimit(userId)) {
+  //   return res.status(429).json({
+  //     success: false,
+  //     error: "Daily limit reached (5 times/day). Please try again tomorrow."
+  //   });
+  // }
   const { country, places = [], startDate } = req.body;
 
   try {

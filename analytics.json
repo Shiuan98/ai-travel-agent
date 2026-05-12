@@ -1,0 +1,20 @@
+{
+  "clicks": [
+    {
+      "url": "https://www.trip.com/flights/?to=Tokyo%2C%20Japan&locale=en-US",
+      "type": "flight",
+      "country": "japan",
+      "source": "tripcom",
+      "ip": "::1",
+      "time": "2026-05-12T07:30:41.146Z"
+    },
+    {
+      "url": "https://www.google.com/maps/search/?api=1&query=Gyopao%20Gyoza%20Shinjuku%20Shinjuku",
+      "type": "restaurant",
+      "country": "japan",
+      "source": "google",
+      "ip": "::1",
+      "time": "2026-05-12T07:30:56.678Z"
+    }
+  ]
+}

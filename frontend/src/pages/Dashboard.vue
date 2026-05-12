@@ -61,7 +61,7 @@ export default {
 
   methods: {
     async loadStats() {
-      const res = await fetch("https://ai-travel-agent-m6hzd85rf-chen-woei-shiuan-s-projects.vercel.app/stats");
+      const res = await fetch("https://ai-travel-agent-lnul.onrender.com/stats");
       this.stats = await res.json();
     }
   }

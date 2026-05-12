@@ -94,7 +94,7 @@
             </p>
           <div class="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
             <a v-if="trip.flightLink" 
-              :href="`https://ai-travel-agent-m6hzd85rf-chen-woei-shiuan-s-projects.vercel.app/go?url=${encodeURIComponent(trip.flightLink)}&type=flight&source=tripcom&country=${country}`"
+              :href="`https://ai-travel-agent-lnul.onrender.com/go?url=${encodeURIComponent(trip.flightLink)}&type=flight&source=tripcom&country=${country}`"
               target="_blank" 
               class="bg-blue-600 hover:bg-blue-500 py-4 px-6 rounded-2xl font-bold flex items-center justify-center gap-2 transition-all">
               ✈️ Find Cheapest Flight Now
@@ -159,7 +159,7 @@
                         <div class="text-sm text-zinc-500 mt-4 leading-relaxed italic">{{ r.address }}</div>
                       </div>
                       
-                      <a :href="`https://ai-travel-agent-m6hzd85rf-chen-woei-shiuan-s-projects.vercel.app/go?url=${encodeURIComponent(r.links.google)}&type=restaurant&source=google&country=${country}`"
+                      <a :href="`https://ai-travel-agent-lnul.onrender.com/go?url=${encodeURIComponent(r.links.google)}&type=restaurant&source=google&country=${country}`"
                         target="_blank" 
                         class="money-btn mt-6 !bg-zinc-800 !text-zinc-300 border-zinc-700">
                         😋 Reserve Popular Local Restaurant
@@ -180,7 +180,7 @@
                       <p class="text-xs text-zinc-500 mb-2">
                         Best deals curated for your itinerary
                       </p>
-                      <a :href="`https://ai-travel-agent-m6hzd85rf-chen-woei-shiuan-s-projects.vercel.app/go?url=${encodeURIComponent(h.links.booking)}&type=hotel&source=booking&country=${country}`"
+                      <a :href="`https://ai-travel-agent-lnul.onrender.com/go?url=${encodeURIComponent(h.links.booking)}&type=hotel&source=booking&country=${country}`"
                         target="_blank" 
                         class="money-btn mt-6">
                         🏨 Book Best Value Hotel in Area
@@ -237,7 +237,7 @@ export default {
         : [];
 
       try {
-        const res = await fetch("https://ai-travel-agent-m6hzd85rf-chen-woei-shiuan-s-projects.vercel.app/api/generate-trip", {
+        const res = await fetch("https://ai-travel-agent-lnul.onrender.com/api/generate-trip", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -279,7 +279,7 @@ export default {
       this.loading = true;
 
       try {
-        const res = await fetch("https://ai-travel-agent-m6hzd85rf-chen-woei-shiuan-s-projects.vercel.app/api/translate-trip", {
+        const res = await fetch("https://ai-travel-agent-lnul.onrender.com/api/translate-trip", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({

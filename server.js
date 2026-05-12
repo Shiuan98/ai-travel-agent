@@ -60,7 +60,6 @@ async function fetchPlaces(query, area) {
         rating: p.rating || "4.5",
         address: p.formatted_address || area,
         links: {
-          klook: `https://klook.tpx.lv/yKNZvKou`,
           google: `https://www.google.com/maps/search/?api=1&query=${searchName}`
         }
       };
@@ -192,7 +191,7 @@ app.post("/api/generate-trip", async (req, res) => {
     let data = JSON.parse(response.choices[0].message.content);
 
     // ✈️ Add a global flight link for the destination
-    data.flightLink = `https://www.aviasales.com/search/${encodeURIComponent(data.destination)}`
+    data.flightLink = `https://aviasales.tpx.lv/8U81n0qC`
 
     for (const day of data.plan) {
       const area = day.area || data.destination;

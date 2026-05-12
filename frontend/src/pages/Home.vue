@@ -180,7 +180,7 @@
                       <p class="text-xs text-zinc-500 mb-2">
                         Best deals curated for your itinerary
                       </p>
-                      <a :href="`https://ai-travel-agent-lnul.onrender.com/go?url=${encodeURIComponent(r.links.klook)}&type=activity&source=klook&country=${country}&place=${encodeURIComponent(r.name)}`"
+                      <a :href="`https://ai-travel-agent-lnul.onrender.com/go?url=${encodeURIComponent(h.links.klook)}&type=activity&source=klook&country=${country}&place=${encodeURIComponent(h.name)}`"
                         target="_blank" 
                         class="money-btn mt-6">
                         🏨 Book Best Value Hotel in Area

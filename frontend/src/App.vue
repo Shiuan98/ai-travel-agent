@@ -232,7 +232,7 @@ export default {
         : [];
 
       try {
-        const res = await fetch("http://localhost:3000/api/generate-trip", {
+        const res = await fetch("https://ai-travel-agent-lnul.onrender.com/api/generate-trip", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -274,7 +274,7 @@ export default {
       this.loading = true;
 
       try {
-        const res = await fetch("http://localhost:3000/api/translate-trip", {
+        const res = await fetch("https://ai-travel-agent-lnul.onrender.com/api/translate-trip", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({

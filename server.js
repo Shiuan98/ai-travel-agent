@@ -191,7 +191,7 @@ app.post("/api/generate-trip", async (req, res) => {
     let data = JSON.parse(response.choices[0].message.content);
 
     // ✈️ Add a global flight link for the destination
-    data.flightLink = `https://aviasales.tpx.lv/8U81n0qC`
+    data.flightLink = `https://aviasales.tpx.lv/nxQINI1T`
 
     for (const day of data.plan) {
       const area = day.area || data.destination;

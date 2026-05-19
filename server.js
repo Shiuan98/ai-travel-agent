@@ -60,7 +60,8 @@ async function fetchPlaces(query, area) {
         rating: p.rating || "4.5",
         address: p.formatted_address || area,
         links: {
-          google: `https://www.google.com/maps/search/?api=1&query=${searchName}`
+          google: `https://www.google.com/maps/search/?api=1&query=${searchName}`,
+          trip: `https://www.trip.com/hotels/list?display=${encodeURIComponent(area)}&Allianceid=8223699&SID=311233924&trip_sub1=hotelBtn`
         }
       };
     });

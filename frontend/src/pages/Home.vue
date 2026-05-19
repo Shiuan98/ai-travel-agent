@@ -1,14 +1,12 @@
 <template>
   <div class="min-h-screen bg-zinc-950 text-white selection:bg-cyan-500/30">
     <div class="border-b border-zinc-800 bg-gradient-to-r from-zinc-900 to-zinc-950 sticky top-0 z-50">
-      <div class="max-w-6xl mx-auto px-5 sm:px-6 py-6 md:py-8 flex justify-between items-center">
-        <div>
-          <h1 class="text-3xl md:text-5xl font-bold tracking-tighter flex items-center gap-3">
-            🌍 <span class="bg-clip-text text-transparent bg-gradient-to-b from-white to-zinc-400">AI Travel Planner</span>
+      <div class="max-w-6xl mx-auto px-5 sm:px-6 py-3 md:py-4 flex justify-between items-center">
+        <div class="headerWrap">
+          <a href="/" class="logo"><img src="../../public/logo.png" /></a>
+          <h1 class="text-3xl md:text-3xl font-bold tracking-tighter flex items-center gap-3">
+            <span class="bg-clip-text text-transparent bg-gradient-to-b from-white to-zinc-400">Smart Trip Ai • Use Ai to plan for your trip</span>
           </h1>
-          <p class="text-zinc-500 mt-1 text-base md:text-lg font-medium">
-            Smart itineraries • Real-world data
-          </p>
         </div>
       </div>
     </div>
@@ -93,17 +91,12 @@
               Live cheapest routes from global airlines
             </p>
           <div class="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
-            <a v-if="trip.flightLink" 
-              :href="`https://ai-travel-agent-lnul.onrender.com/go?type=flight&country=${country}&url=${encodeURIComponent(trip.flightLink)}`"
-              target="_blank" 
-              class="bg-blue-600 hover:bg-blue-500 py-4 px-6 rounded-2xl font-bold flex items-center justify-center gap-2 transition-all">
-              🔥 Compare Cheapest Flights Now
-            </a>
-            <button @click="translateTrip('zh')" class="btn-secondary py-4 px-4 rounded-2xl font-bold">
+            <a @click="scrollToFlightBox" class="bg-blue-600 hover:bg-blue-500 py-4 px-6 rounded-2xl font-bold flex items-center justify-center gap-2 transition-all cursor-pointer"> 🔥 Compare Cheapest Flights Now </a>
+            <button @click="translateTrip('zh')" class="btn-secondary py-4 px-4 rounded-2xl font-bold cursor-pointer">
               🌏 中文
             </button>
 
-            <button @click="translateTrip('en')" class="btn-secondary py-4 px-4 rounded-2xl font-bold">
+            <button @click="translateTrip('en')" class="btn-secondary py-4 px-4 rounded-2xl font-bold cursor-pointer">
               🇺🇸 EN
             </button>
             <button @click="clearTrip" class="text-zinc-500 hover:text-white transition-colors text-lg font-medium py-2">
@@ -182,7 +175,8 @@
                       </p>
                       <a :href="`https://ai-travel-agent-lnul.onrender.com/go?url=${encodeURIComponent(h.links.google)}&type=restaurant&source=google&country=${country}`"
                         target="_blank" 
-                        class="money-btn mt-6">
+                        class="money-btn mt-6"
+                        id="viewHotelBtn">
                         📍 Find Nearby Hotels
                       </a>
                     </div>
@@ -191,7 +185,9 @@
             </div>
           </div>
         </div>
-
+        <div id="flight-search-box" class="mt-24">
+          <iframe border="0" src="https://www.trip.com/partners/ad/S16894677?Allianceid=8223699&SID=311233924&trip_sub1=" style="width:100%;height:200px;border: none;" frameborder="0" scrolling="no" id="S16894677"></iframe>
+        </div>
         <div v-if="trip.tips?.length" class="mt-16 bg-gradient-to-br from-zinc-900 to-black border border-zinc-700/50 p-10 md:p-14 rounded-[3rem]">
           <h3 class="text-3xl font-bold mb-10 flex items-center gap-4">
             <span class="bg-cyan-500 p-2 rounded-lg text-black text-sm">PRO</span> Travel Tips
@@ -300,6 +296,16 @@ export default {
       }
 
       this.loading = false;
+    },
+    scrollToFlightBox() {
+      const el = document.getElementById("flight-search-box");
+
+      if (el) {
+        el.scrollIntoView({
+          behavior: "smooth"
+        });
+      }
+
     }
   }
 };
@@ -307,6 +313,8 @@ export default {
 
 <style scoped>
 /* Base Input Styles */
+.headerWrap{display: flex;align-content: center;column-gap: 20px;}
+.headerWrap .logo img{width: 120px;height: auto;object-fit: cover;}
 .input {
   width: 100%;
   padding: 18px 24px;
@@ -447,6 +455,9 @@ export default {
   li {
     font-size: 1.2rem !important;
     line-height: 1.5;
+  }
+  .tools-searchbox-flight{
+    background: #000000!important;
   }
 }
 </style>

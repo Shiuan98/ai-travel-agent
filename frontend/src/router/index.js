@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import Country from '../pages/Country.vue';
 
 import Home from "../pages/Home.vue";
 import Dashboard from "../pages/Dashboard.vue";
@@ -11,6 +12,10 @@ const routes = [
   {
     path: "/dashboard",
     component: Dashboard
+  },
+  {
+    path: '/country/:slug',
+    component: Country
   }
 ];
 
